@@ -3,12 +3,11 @@ import React from 'react'
 
 interface ModalProps {
     openModal: boolean;
-    setOpenModal:  (open: boolean) => boolean | void;
+    setOpenModal: (open: boolean) => boolean | void;
 }
 
 
-
-const ModalAdd: React.FC<ModalProps> = ({ openModal, setOpenModal }) => {
+const ModalEdit: React.FC<ModalProps> = ({ openModal, setOpenModal }) => {
     return (
         <dialog className={`modal ${openModal ? "modal-open" : ""}`}>
             <div className="modal-box">
@@ -26,4 +25,4 @@ const ModalAdd: React.FC<ModalProps> = ({ openModal, setOpenModal }) => {
     )
 }
 
-export default ModalAdd
+export default ModalEdit
