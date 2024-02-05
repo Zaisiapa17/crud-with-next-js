@@ -1,12 +1,32 @@
 {
-    "biodata": [
-        {
-            "id": "1",
-            "name": "alie"
-        },
-        {
-            "id": "2",
-            "name": "nih bous"
-        }
-    ]
+  "biodata": [
+    {
+      "id": "1",
+      "name": "alie"
+    },
+    {
+      "id": "2",
+      "name": "nih bous"
+    },
+    {
+      "id": "ded6081d-b6a8-444d-a902-e9f9db777fc8",
+      "name": "tes"
+    },
+    {
+      "id": "c323f2f5-ab8f-4807-8be3-cdcb71a37a73",
+      "name": "mantap broooo"
+    },
+    {
+      "id": "0d861928-c581-4103-836d-a5733e349536",
+      "name": "gsfdsdfg"
+    },
+    {
+      "id": "83f4649a-f26a-4e58-80e5-81938230ff82",
+      "name": "lkasdjflakjdf"
+    },
+    {
+      "id": "ae9c7924-e8ae-48bb-a95a-19cb8cd92875",
+      "name": "lkasdjflakjdf"
+    }
+  ]
 }

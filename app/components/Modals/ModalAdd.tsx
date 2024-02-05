@@ -1,26 +1,54 @@
-import React from 'react'
+import { addPerson } from '@/api';
+import { useRouter } from 'next/navigation';
+import React, { FormEvent, FormEventHandler, useState } from 'react'
+import { v4 as uuidv4 } from 'uuid';
 
 
 interface ModalProps {
     openModal: boolean;
-    setOpenModal:  (open: boolean) => boolean | void;
+    setOpenModal: (open: boolean) => boolean | void;
 }
 
 
 
 const ModalAdd: React.FC<ModalProps> = ({ openModal, setOpenModal }) => {
+    
+    const router = useRouter();
+    const [personName, setPersonName] = useState<string>("");
+
+    const handleSubmitAdd: FormEventHandler<HTMLFormElement> = async (e: FormEvent) => {
+        e.preventDefault();
+
+        await addPerson({
+            id: uuidv4(),
+            name: personName,
+        });
+
+        setOpenModal(false);
+        setPersonName("");
+        router.refresh();
+    }
+
     return (
         <dialog className={`modal ${openModal ? "modal-open" : ""}`}>
             <div className="modal-box">
                 <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onClick={() => { setOpenModal(false) }}>✕</button>
-                <form method="dialog" className='text-start'>
-                    <h3 className="font-bold text-lg">edit Person</h3>
-                    <p className="py-4">edit person</p>
+                <form method="dialog" className='text-start' onSubmit={handleSubmitAdd}>
+                    <h3 className="font-bold text-lg mb-2">Add Person</h3>
+                    <div className='flex justify-center'>
+                        <input
+                            value={personName}
+                            onChange={(e) => setPersonName(e.target.value)}
+                            type='text'
+                            placeholder='Name'
+                            className="input input-bordered input-md w-full"
+                        />
+                    </div>
+                    <div className="modal-action">
+                        <button type='submit' className="btn btn-sm btn-primary" onClick={() => { }}>Save</button>
+                        <div className="btn btn-sm" onClick={() => { setOpenModal(false) }}>Close</div>
+                    </div>
                 </form>
-                <div className="modal-action">
-                    <button className="btn btn-sm btn-primary" onClick={() => {}}>Save</button>
-                    <button className="btn btn-sm" onClick={() => { setOpenModal(false) }}>Close</button>
-                </div>
             </div>
         </dialog>
     )
