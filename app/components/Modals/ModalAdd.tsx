@@ -13,7 +13,7 @@ const ModalAdd: React.FC<ModalProps> = ({ openModal, setOpenModal }) => {
         <dialog className={`modal ${openModal ? "modal-open" : ""}`}>
             <div className="modal-box">
                 <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onClick={() => { setOpenModal(false) }}>✕</button>
-                <form method="dialog">
+                <form method="dialog" className='text-start'>
                     <h3 className="font-bold text-lg">edit Person</h3>
                     <p className="py-4">edit person</p>
                 </form>
