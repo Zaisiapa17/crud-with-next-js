@@ -16,6 +16,14 @@ interface TaskProps {
 const Biodata: React.FC<TaskProps> = ({ biodatas }) => {
     const [openModalEdit, setOpenModalEdit] = useState<boolean>(false);
     const [openModalDelete, setOpenModalDelete] = useState<boolean>(false);
+    const [idPerson, setIdPerson] = useState<string>('');
+
+    const changeIdDelete = (id: string) => {
+        
+        setIdPerson(id);
+        setOpenModalDelete(true);
+
+    }
 
     return (
         <tr key={biodatas.id}>
@@ -32,12 +40,12 @@ const Biodata: React.FC<TaskProps> = ({ biodatas }) => {
                     <RiDeleteBin6Line
                         cursor='pointer'
                         className='text-red-400'
-                        onClick={() => setOpenModalDelete(true)}
+                        onClick={() => changeIdDelete(biodatas.id)}
                     />
                 </div>
             </td>
             <ModalEdit openModal={openModalEdit} setOpenModal={setOpenModalEdit}/>
-            <ModalDelete openModal={openModalDelete} setOpenModal={setOpenModalDelete}/>
+            <ModalDelete openModal={openModalDelete} setOpenModal={setOpenModalDelete} idPerson={idPerson}/>
         </tr>
     )
 }

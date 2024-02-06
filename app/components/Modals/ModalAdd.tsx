@@ -16,7 +16,7 @@ const ModalAdd: React.FC<ModalProps> = ({ openModal, setOpenModal }) => {
     const router = useRouter();
     const [personName, setPersonName] = useState<string>("");
 
-    const handleSubmitAdd: FormEventHandler<HTMLFormElement> = async (e: FormEvent) => {
+    const handleSubmit: FormEventHandler<HTMLFormElement> = async (e: FormEvent) => {
         e.preventDefault();
 
         await addPerson({
@@ -33,7 +33,7 @@ const ModalAdd: React.FC<ModalProps> = ({ openModal, setOpenModal }) => {
         <dialog className={`modal ${openModal ? "modal-open" : ""}`}>
             <div className="modal-box">
                 <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onClick={() => { setOpenModal(false) }}>✕</button>
-                <form method="dialog" className='text-start' onSubmit={handleSubmitAdd}>
+                <form method="dialog" className='text-start' onSubmit={handleSubmit}>
                     <h3 className="font-bold text-lg mb-2">Add Person</h3>
                     <div className='flex justify-center'>
                         <input
