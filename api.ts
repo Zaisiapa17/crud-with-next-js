@@ -20,3 +20,9 @@ export const addPerson = async (todo: ITask): Promise<ITask> => {
     const newTodo = await res.json();
     return newTodo;
 }
+
+export const deletePerson = async (id: string): Promise<void> => {
+    await fetch(`${baseUrl}/biodata/${id}`, {
+        method: 'DELETE',
+    })
+}
