@@ -26,3 +26,15 @@ export const deletePerson = async (id: string): Promise<void> => {
         method: 'DELETE',
     })
 }
+
+export const editPerson = async (todo: ITask): Promise<ITask> => {
+    const res = await fetch(`${baseUrl}/biodata/${todo.id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(todo)
+    })
+    const updatedPersonName = await res.json();
+    return updatedPersonName;
+}

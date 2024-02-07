@@ -17,12 +17,23 @@ const Biodata: React.FC<TaskProps> = ({ biodatas }) => {
     const [openModalEdit, setOpenModalEdit] = useState<boolean>(false);
     const [openModalDelete, setOpenModalDelete] = useState<boolean>(false);
     const [idPerson, setIdPerson] = useState<string>('');
+    const [dataEdit, setDataEdit] = useState<{ id: string; name: string }>({
+        id: '',
+        name: '',
+    });
 
-    const changeIdDelete = (id: string) => {
-        
+    const changeEdit = (id: string, name: string) => {
+        setDataEdit(prevDataEdit => ({
+            ...prevDataEdit,
+            id: id,
+            name: name,
+        }));
+        setOpenModalEdit(true);
+    }
+
+    const changeDelete = (id: string) => {
         setIdPerson(id);
         setOpenModalDelete(true);
-
     }
 
     return (
@@ -33,18 +44,18 @@ const Biodata: React.FC<TaskProps> = ({ biodatas }) => {
                     <FiEdit
                         cursor='pointer'
                         className='text-blue-400'
-                        onClick={() => setOpenModalEdit(true)}
+                        onClick={() => changeEdit(biodatas.id, biodatas.name)}
                     />
                 </div>
                 <div className="tooltip" data-tip="delete">
                     <RiDeleteBin6Line
                         cursor='pointer'
                         className='text-red-400'
-                        onClick={() => changeIdDelete(biodatas.id)}
+                        onClick={() => changeDelete(biodatas.id)}
                     />
                 </div>
             </td>
-            <ModalEdit openModal={openModalEdit} setOpenModal={setOpenModalEdit}/>
+            <ModalEdit openModal={openModalEdit} setOpenModal={setOpenModalEdit} data={dataEdit}/>
             <ModalDelete openModal={openModalDelete} setOpenModal={setOpenModalDelete} idPerson={idPerson}/>
         </tr>
     )
