@@ -1,6 +1,7 @@
 import { addPerson } from '@/api';
 import { useRouter } from 'next/navigation';
 import React, { FormEvent, FormEventHandler, useState } from 'react'
+import toast, { Toaster } from 'react-hot-toast';
 import { v4 as uuidv4 } from 'uuid';
 
 
@@ -12,18 +13,24 @@ interface ModalProps {
 
 
 const ModalAdd: React.FC<ModalProps> = ({ openModal, setOpenModal }) => {
-    
+
     const router = useRouter();
     const [personName, setPersonName] = useState<string>("");
 
     const handleSubmit: FormEventHandler<HTMLFormElement> = async (e: FormEvent) => {
         e.preventDefault();
 
+        const trimmedName = personName.trim();
+        if (trimmedName.length === 0) {
+            toast.error("name cannot be empty");
+            return;
+        }
+
         await addPerson({
             id: uuidv4(),
             name: personName,
         });
-
+        
         setOpenModal(false);
         setPersonName("");
         router.refresh();
@@ -50,6 +57,7 @@ const ModalAdd: React.FC<ModalProps> = ({ openModal, setOpenModal }) => {
                     </div>
                 </form>
             </div>
+            <Toaster />
         </dialog>
     )
 }

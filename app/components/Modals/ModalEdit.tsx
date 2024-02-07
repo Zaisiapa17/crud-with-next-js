@@ -1,6 +1,7 @@
 import React, { FormEvent, FormEventHandler, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation';
 import { editPerson } from '@/api';
+import toast, { Toaster } from 'react-hot-toast';
 
 
 interface ModalProps {
@@ -21,15 +22,20 @@ const ModalEdit: React.FC<ModalProps> = ({ openModal, setOpenModal, data }) => {
     useEffect(() => {
         setPersonName(data.name);
     }, [data.name]);
-
     const handleSubmit: FormEventHandler<HTMLFormElement> = async (e: FormEvent) => {
         e.preventDefault();
 
+        const trimmedName = personName.trim();
+        if (trimmedName.length === 0) {
+            toast.error("name cannot be empty");
+            return;
+        }
+        
         await editPerson({
             id: data.id,
             name: personName,
         });
-
+        
         setOpenModal(false);
         setPersonName("");
         router.refresh();
@@ -56,6 +62,7 @@ const ModalEdit: React.FC<ModalProps> = ({ openModal, setOpenModal, data }) => {
                     <button className="btn btn-sm" onClick={() => { setOpenModal(false) }}>Close</button>
                 </div>
             </div>
+            <Toaster />
         </dialog>
     )
 }
